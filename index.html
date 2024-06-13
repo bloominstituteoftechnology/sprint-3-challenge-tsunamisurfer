@@ -205,8 +205,9 @@
           this.ants = ants.map((name) => ({ name, health: 100 }));
         }
 
+                        
         work() {
-          //not working correctly
+          let antMan = `${this.ants.length} ants starting work!`
           if (this.ants.length === 0) {
             return "No ants here. Did you work them to death?";
           }
@@ -217,8 +218,8 @@
 
           this.ants = this.ants.filter((ant) => ant.health > 0);
 
-          let antCount = this.ants.length;
-          return `${antCount} ants starting work!`;
+          //let antCount = this.ants.length;
+          return `${antMan}` 
         }
 
         feed(antName) {
