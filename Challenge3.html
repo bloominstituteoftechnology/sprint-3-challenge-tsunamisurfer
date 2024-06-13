@@ -153,20 +153,19 @@
         //    ebook.next() // returns null
         // 🌟 HINT: remember about the `slice` method which strings and arrays have
         // ❗ Feel free to implement `back`, although this is not required nor graded
-      constructor(book, charactersPerPage){
-        this.book = book
-        this.charactersPerPage = charactersPerPage
-        this.current = 0
-      }
-      next(){
-        const nextPage = this.book.slice(
-          this.current * this.charactersPerPage,
-          (this.current + 1) *this.charactersPerPage
-        )
-      this.current++
-      return nextPage.length > 0 ? nextPage : null
-      }
-      
+        constructor(book, charactersPerPage) {
+          this.book = book;
+          this.charactersPerPage = charactersPerPage;
+          this.current = 0;
+        }
+        next() {
+          const nextPage = this.book.slice(
+            this.current * this.charactersPerPage,
+            (this.current + 1) * this.charactersPerPage
+          );
+          this.current++;
+          return nextPage.length > 0 ? nextPage : null;
+        }
       }
 
       // 👉 CHALLENGE 4 AntFarm
@@ -202,35 +201,43 @@
         // 👉 HINT: if you are not feeling confident with map and filter, solve the problem with for loops,
         //      and with the piece of mind of all tests passing, refactor to use map/filter
         constructor(...ants) {
-          this.ants = ants.map(name => ({ name, health: 100 }));
+          // 🧠 Instances of AntFarm have an `ants` property holding an array of ants:
+          this.ants = ants.map((name) => ({ name, health: 100 }));
         }
+
         work() {
+          //not working correctly
           if (this.ants.length === 0) {
             return "No ants here. Did you work them to death?";
           }
-          
-          this.ants.forEach(ant => {
-            ant.health -= 20
-            ant.health =Math.max(0, ant.health)
-          })
-           this.ants = this.ants.filter(ant => ant.health >0)
-             
-          let antCount = this.ants.length
-          return `${antCount} ant${antCount !==1 ? 's' : ""} starting work!`
+
+          this.ants.forEach((ant) => {
+            ant.health -= 20;
+          });
+
+          this.ants = this.ants.filter((ant) => ant.health > 0);
+
+          let antCount = this.ants.length;
+          return `${antCount} ants starting work!`;
         }
-        feed(antName){
-          let foundAnt = this.ants.find(ant => ant.name === antName)
-          if(foundAnt){
-            foundAnt.health += 15
-            return "Yum!"
+
+        feed(antName) {
+          let found = false;
+
+          this.ants.forEach((ant) => {
+            if (ant.name === antName) {
+              ant.health += +15;
+              found = true;
+            }
+          });
+
+          if (found) {
+            return "Yum!";
           } else {
-            return `${antName} not found!`
+            return `${antName} not found!`;
           }
         }
-        
-        }
-      
-
+      }
 
       // 🧪 TESTS, do not make any changes below this line ===================
       // 🧪 TESTS, do not make any changes below this line ===================
